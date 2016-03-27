@@ -27,6 +27,7 @@ def getNgrams(query, corpus, startYear, endYear, smoothing, caseInsensitive):
         params['content'] = params['content'].replace('@', '=>')
     req = requests.get('http://books.google.com/ngrams/graph', params=params)
     res = re.findall('var data = (.*?);\\n', req.text)
+    # print req.text
     if res:
         data = {qry['ngram']: qry['timeseries']
                 for qry in literal_eval(res[0])}
@@ -139,7 +140,7 @@ def runQuery(argumentString):
             print(('Data saved to %s' % filename))
         if toPlot:
             try:
-                subprocess.call(['python', 'xkcd.py', filename])
+                subprocess.call(['/Users/dwhitehead/Documents/github/anki_deck_builder/vanki_deck_builder/bin/frameworkpython.sh', 'google-ngrams/xkcd.py', filename])
             except:
                 if not toSave:
                     print(('Currently, if you want to create a plot you ' +
