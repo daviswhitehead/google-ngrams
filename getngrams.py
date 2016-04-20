@@ -136,11 +136,11 @@ def runQuery(argumentString):
             for col in df.columns:
                 if '&gt;' in col:
                     df[col.replace('&gt;', '>')] = df.pop(col)
-            df.to_csv(filename, index=False)
+            df.to_csv('{}/{}'.format(query, filename), index=False)
             print(('Data saved to %s' % filename))
         if toPlot:
             try:
-                subprocess.call(['/Users/dwhitehead/Documents/github/anki_deck_builder/vanki_deck_builder/bin/frameworkpython.sh', 'google-ngrams/xkcd.py', filename])
+                subprocess.call(['/Users/dwhitehead/Documents/github/anki_deck_builder/vanki_deck_builder/bin/frameworkpython.sh', 'google-ngrams/xkcd.py', 'data/{}/{}'.format(query, filename)])
             except:
                 if not toSave:
                     print(('Currently, if you want to create a plot you ' +
